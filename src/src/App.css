@@ -1,0 +1,48 @@
+.app-root {
+  min-height: 100vh;
+  padding: 64px 0 96px;
+  background: radial-gradient(circle at top, rgba(110, 141, 255, 0.2), transparent 55%),
+    linear-gradient(180deg, #eef2ff 0%, #f4f6fb 45%, #ffffff 100%);
+}
+
+.hero {
+  padding: 48px;
+  margin-bottom: 32px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  backdrop-filter: blur(16px);
+}
+
+.feature-card {
+  height: 100%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.timeline-card,
+.cta-card {
+  margin-top: 40px;
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(145, 163, 186, 0.2);
+}
+
+.cta-card code {
+  background-color: rgba(0, 0, 0, 0.06);
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+@media (max-width: 600px) {
+  .app-root {
+    padding: 40px 0 64px;
+  }
+
+  .hero,
+  .timeline-card,
+  .cta-card {
+    padding: 24px;
+  }
+}
