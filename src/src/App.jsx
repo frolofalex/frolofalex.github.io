@@ -19,7 +19,7 @@ function App() {
               </Typography>
               <Typography variant="body2">г. Москва, ул. Примерная, д. 1</Typography>
             </Stack>
-            <Stack spacing={0.5} className="header-contacts">
+            <Stack spacing={0.5} className="header-contacts desktop-only">
               <Typography variant="body2">email: info@example.com</Typography>
               <Typography variant="body2">тел: +7 (900) 000-00-00</Typography>
             </Stack>
@@ -34,6 +34,20 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+        </Container>
+      </Box>
+      <Box component="footer" className="site-footer">
+        <Container maxWidth="lg">
+          <Stack
+            spacing={0.5}
+            className="mobile-only footer-contacts"
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Typography variant="body2">email: info@example.com</Typography>
+            <Typography variant="body2">тел: +7 (900) 000-00-00</Typography>
+          </Stack>
         </Container>
       </Box>
     </>
