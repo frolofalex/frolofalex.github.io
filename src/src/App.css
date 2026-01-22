@@ -3,14 +3,55 @@
   padding: 64px 0 96px;
   background: radial-gradient(circle at top, rgba(110, 141, 255, 0.2), transparent 55%),
     linear-gradient(180deg, #eef2ff 0%, #f4f6fb 45%, #ffffff 100%);
+  padding-top: 160px;
 }
 
-.hero {
-  padding: 48px;
-  margin-bottom: 32px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(99, 102, 241, 0.15);
-  backdrop-filter: blur(16px);
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid rgba(145, 163, 186, 0.3);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  padding: 16px 0;
+  backdrop-filter: blur(10px);
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.brand-block {
+  flex: 1;
+  min-width: 220px;
+}
+
+.logo-placeholder {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #0ea5e9, #6366f1);
+}
+
+.branding {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.header-contacts {
+  margin-left: auto;
+  text-align: right;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-weight: 500;
+  color: #0f172a;
 }
 
 .feature-card {
@@ -21,28 +62,65 @@
   gap: 12px;
 }
 
-.timeline-card,
-.cta-card {
-  margin-top: 40px;
+.surface-card,
+.contact-card,
+.pillar-card {
   padding: 32px;
   background: rgba(255, 255, 255, 0.9);
   border: 1px solid rgba(145, 163, 186, 0.2);
 }
 
-.cta-card code {
-  background-color: rgba(0, 0, 0, 0.06);
-  padding: 2px 6px;
-  border-radius: 6px;
+.pillar-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pillar-icon {
+  width: 52px;
+  height: 52px;
+  background-color: rgba(59, 130, 246, 0.08);
+}
+
+.about-list {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
 }
 
 @media (max-width: 600px) {
   .app-root {
     padding: 40px 0 64px;
+    padding-top: 140px;
   }
 
-  .hero,
-  .timeline-card,
-  .cta-card {
+  .surface-card,
+  .pillar-card,
+  .contact-card {
     padding: 24px;
+  }
+
+  .header-row {
+    gap: 16px;
+  }
+}
+
+.feature-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 600px) {
+  .feature-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .feature-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
