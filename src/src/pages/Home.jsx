@@ -1,25 +1,17 @@
-import { Box, Paper, Typography } from '@mui/material'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import { Link as RouterLink } from 'react-router-dom'
+import { Box } from '@mui/material'
+import { useEffect } from 'react'
 import { services } from '../data/services.js'
+import ServiceCard from '../components/ServiceCard.jsx'
 
 export default function Home() {
+  useEffect(() => {
+    document.title = 'Аргумент'
+  }, [])
+
   return (
     <Box className="feature-grid">
-      {services.map(({ title, description, slug }) => (
-        <Paper
-          className="feature-card"
-          elevation={1}
-          key={title}
-          component={RouterLink}
-          to={`/services/${slug}`}
-        >
-          <Typography variant="h6" component="h3">
-            {title}
-          </Typography>
-          <Typography color="text.secondary">{description}</Typography>
-          <ArrowForwardIosIcon className="card-arrow" fontSize="inherit" />
-        </Paper>
+      {services.map((service) => (
+        <ServiceCard key={service.slug} service={service} />
       ))}
     </Box>
   )

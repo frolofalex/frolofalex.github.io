@@ -1,5 +1,7 @@
-import { Box, Container, Stack, Typography } from '@mui/material'
+import { Box, Container, Link, Stack, Typography } from '@mui/material'
 import { Route, Routes } from 'react-router-dom'
+import MailOutlineIcon from '@mui/icons-material/MailOutline'
+import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk'
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
 import Service from './pages/Service.jsx'
@@ -19,9 +21,15 @@ function App() {
               </Typography>
               <Typography variant="body2">г. Москва, ул. Примерная, д. 1</Typography>
             </Stack>
-            <Stack spacing={0.5} className="header-contacts desktop-only">
-              <Typography variant="body2">email: info@example.com</Typography>
-              <Typography variant="body2">тел: +7 (900) 000-00-00</Typography>
+            <Stack spacing={1} className="header-contacts desktop-only">
+              <Link href="mailto:info@example.com" className="contact-link">
+                <MailOutlineIcon fontSize="small" className="contact-icon" />
+                <span>info@example.com</span>
+              </Link>
+              <Link href="tel:+79000000000" className="contact-link">
+                <PhoneInTalkIcon fontSize="small" className="contact-icon" />
+                <span>+7 (900) 000-00-00</span>
+              </Link>
             </Stack>
           </Box>
         </Container>
@@ -31,7 +39,7 @@ function App() {
           <Routes>
             <Route index element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/services/:slug" element={<Service />} />
+            <Route path="/services/*" element={<Service />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Container>
@@ -45,8 +53,14 @@ function App() {
             justifyContent="space-between"
             alignItems="center"
           >
-            <Typography variant="body2">email: info@example.com</Typography>
-            <Typography variant="body2">тел: +7 (900) 000-00-00</Typography>
+            <Link href="mailto:info@example.com" className="contact-link">
+              <MailOutlineIcon fontSize="small" className="contact-icon" />
+              <span>info@example.com</span>
+            </Link>
+            <Link href="tel:+79000000000" className="contact-link">
+              <PhoneInTalkIcon fontSize="small" className="contact-icon" />
+              <span>+7 (900) 000-00-00</span>
+            </Link>
           </Stack>
         </Container>
       </Box>
