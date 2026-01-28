@@ -1,14 +1,18 @@
-import { Box, Paper, Stack, Typography } from '@mui/material'
-import { useEffect } from 'react'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { Box, Button, Collapse, Paper, Stack, Typography } from '@mui/material'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { findService } from '../data/services.js'
 import ServiceCard from '../components/ServiceCard.jsx'
 import NotFound from './NotFound.jsx'
+import PromoCard from '../components/PromoCard.jsx'
+import { CONTACT_PHONE_DISPLAY, CONTACT_PHONE_DIAL } from '../constants/contacts.js'
 
 export default function Service() {
   const { '*': wildcardPath } = useParams()
   const pathSegments = wildcardPath ? wildcardPath.split('/').filter(Boolean) : []
   const service = findService(pathSegments)
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false)
 
   useEffect(() => {
     document.title = service ? `Аргумент — ${service.title}` : 'Аргумент'
@@ -19,9 +23,27 @@ export default function Service() {
   }
 
   const childServices = service.children ?? []
+  const detailParagraphs = Array.isArray(service.details)
+    ? service.details
+    : typeof service.details === 'string'
+      ? service.details
+          .split(/\n\s*\n+/)
+          .map((paragraph) => paragraph.trim())
+          .filter(Boolean)
+      : []
 
   return (
     <Stack spacing={4}>
+      {service.promo && (
+        <PromoCard
+          title={service.promo.title}
+          price={service.promo.price}
+          description={service.promo.description}
+          backgroundImage={service.promo.backgroundImage}
+          phoneDisplay={CONTACT_PHONE_DISPLAY}
+          phoneNumber={CONTACT_PHONE_DIAL}
+        />
+      )}
       {childServices.length > 0 && (
         <Box>
           <Box className="feature-grid">
@@ -37,7 +59,33 @@ export default function Service() {
             {service.title}
           </Typography>
           <Typography color="text.secondary">{service.description}</Typography>
-          <Typography color="text.secondary">{service.details}</Typography>
+          {detailParagraphs.length > 0 && (
+            <>
+              <Collapse in={isDetailsOpen} timeout="auto" unmountOnExit>
+                <Stack spacing={2}>
+                  {detailParagraphs.map((paragraph, index) => (
+                    <Typography key={index} color="text.secondary">
+                      {paragraph}
+                    </Typography>
+                  ))}
+                </Stack>
+              </Collapse>
+              <Button
+                type="button"
+                variant="text"
+                size="medium"
+                className="details-toggle"
+                onClick={() => setIsDetailsOpen((prev) => !prev)}
+                endIcon={
+                  <ExpandMoreIcon
+                    className={`details-toggle-icon${isDetailsOpen ? ' details-toggle-icon--rotated' : ''}`}
+                  />
+                }
+              >
+                {isDetailsOpen ? 'Скрыть подробности' : 'Показать подробности'}
+              </Button>
+            </>
+          )}
         </Stack>
       </Paper>
     </Stack>

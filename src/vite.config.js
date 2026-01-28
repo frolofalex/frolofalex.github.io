@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
-import { copyFileSync, existsSync } from 'fs'
+import { copyFileSync, existsSync, rmSync } from 'fs'
 import react from '@vitejs/plugin-react-swc'
 
 const copyIndexTo404 = targetDir => ({
@@ -15,11 +15,23 @@ const copyIndexTo404 = targetDir => ({
   },
 })
 
+const cleanAssetsDir = targetDir => ({
+  name: 'clean-assets-dir',
+  buildStart() {
+    const assetsPath = resolve(targetDir, 'assets')
+    if (existsSync(assetsPath)) {
+      rmSync(assetsPath, { recursive: true, force: true })
+    }
+  },
+})
+
 // https://vite.dev/config/
+const buildOutputDir = resolve(__dirname, '..')
+
 export default defineConfig({
-  plugins: [react(), copyIndexTo404(resolve(__dirname, '..'))],
+  plugins: [react(), cleanAssetsDir(buildOutputDir), copyIndexTo404(buildOutputDir)],
   build: {
-    outDir: resolve(__dirname, '..'),
+    outDir: buildOutputDir,
     emptyOutDir: false,
   },
 })
