@@ -26,10 +26,12 @@ export default function Service() {
   const detailParagraphs = Array.isArray(service.details)
     ? service.details
     : typeof service.details === 'string'
-      ? service.details
-          .split(/\n\s*\n+/)
-          .map((paragraph) => paragraph.trim())
-          .filter(Boolean)
+      ? /<\s*[\w!?]/.test(service.details)
+        ? [service.details]
+        : service.details
+            .split(/\n\s*\n+/)
+            .map((paragraph) => paragraph.trim())
+            .filter(Boolean)
       : []
 
   return (
@@ -58,15 +60,24 @@ export default function Service() {
           <Typography variant="h3" component="h1">
             {service.title}
           </Typography>
-          <Typography color="text.secondary">{service.description}</Typography>
+          {service.description && (
+            <Typography
+              color="text.secondary"
+              component="div"
+              dangerouslySetInnerHTML={{ __html: service.description }}
+            />
+          )}
           {detailParagraphs.length > 0 && (
             <>
               <Collapse in={isDetailsOpen} timeout="auto" unmountOnExit>
                 <Stack spacing={2}>
                   {detailParagraphs.map((paragraph, index) => (
-                    <Typography key={index} color="text.secondary">
-                      {paragraph}
-                    </Typography>
+                    <Typography
+                      key={index}
+                      color="text.secondary"
+                      component="div"
+                      dangerouslySetInnerHTML={{ __html: paragraph }}
+                    />
                   ))}
                 </Stack>
               </Collapse>

@@ -36,7 +36,6 @@ export default function ServiceCard({ service }) {
         <Typography variant="h6" className="card-link">
           {title}
         </Typography>
-        <Typography color="text.secondary">{description}</Typography>
       </Stack>
       <ArrowForwardIosIcon className="card-arrow" fontSize="inherit" />
       {children.length > 0 && (

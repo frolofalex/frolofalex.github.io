@@ -18,7 +18,7 @@ export default function PromoCard({ title, price, description, phoneDisplay, pho
       className={className}
       style={cardStyle}
     >
-      <Stack spacing={2.5} className="promo-card-content">
+      <Stack className="promo-card-content">
         <Typography variant="h3" className="promo-title">
           {title}
         </Typography>
@@ -27,7 +27,7 @@ export default function PromoCard({ title, price, description, phoneDisplay, pho
         </Typography>
         <Stack
           direction={{ xs: 'column', sm: 'row' }}
-          spacing={2}
+          spacing={3}
           alignItems={{ xs: 'stretch', sm: 'center' }}
           className="promo-cta-row"
         >
@@ -42,7 +42,7 @@ export default function PromoCard({ title, price, description, phoneDisplay, pho
             startIcon={<PhoneInTalkIcon />}
             className="promo-button"
           >
-            Заказать
+            Позвонить
           </Button>
         </Stack>
       </Stack>
