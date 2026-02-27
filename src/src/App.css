@@ -115,9 +115,18 @@
   width: clamp(120px, 24vw, 160px);
   font-size: 1.05rem;
   min-height: 46px;
-  box-shadow: 0 18px 35px rgba(39, 52, 139, 0.28);
-  letter-spacing: 0.02em;
+  color: #fff;
+  background: linear-gradient(120deg, #4b5edb 0%, #27348b 100%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 12px 30px rgba(27, 38, 105, 0.35);
+  letter-spacing: 0.04em;
   flex: 0 0 auto;
+}
+
+.services-menu-button:hover,
+.services-menu-button:focus-visible {
+  background: linear-gradient(120deg, #5e71ff 0%, #2d3fb5 100%);
+  box-shadow: 0 15px 32px rgba(27, 38, 105, 0.45);
 }
 
 .services-drawer .MuiDrawer-paper {
