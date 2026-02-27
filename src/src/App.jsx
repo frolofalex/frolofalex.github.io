@@ -18,6 +18,7 @@ function App() {
   const [isServicesDrawerOpen, setIsServicesDrawerOpen] = useState(false)
   const [isNavDrawerOpen, setIsNavDrawerOpen] = useState(false)
   const logoImage = '/logo.png'
+  const miniLogoImage = '/favicon.svg'
   const contactLinkSx = {
     color: '#27348b',
     transition: 'color 0.2s ease',
@@ -48,7 +49,7 @@ function App() {
   return (
     <>
       <Box component="header" className="site-header">
-        <Container maxWidth="lg">
+        <Container maxWidth={false} className="site-header-container">
           <Box className="header-row">
             <IconButton
               className="nav-menu-toggle mobile-only"
@@ -62,9 +63,23 @@ function App() {
               <Box component="img" src={logoImage} alt="Логотип Аргумент" className="logo-placeholder" />
               <Stack spacing={0.5} className="brand-block">
                 <Typography variant="h6" className="branding">
+                  <Box
+                    component="img"
+                    src={miniLogoImage}
+                    alt="Мини-логотип Аргумент"
+                    className="brand-mini-logo"
+                    sx={{ mr: 0.5 }}
+                  />
                   Аргумент
                 </Typography>
-                <Typography variant="body2">г. Москва, ул. Примерная, д. 1</Typography>
+                <Typography variant="body2" className="brand-address">
+                  <Box component="span" className="brand-address-line brand-address-line--city">
+                    г. Москва,
+                  </Box>{' '}
+                  <Box component="span" className="brand-address-line brand-address-line--street">
+                    ул. Примерная, д. 1
+                  </Box>
+                </Typography>
               </Stack>
             </Box>
             <Box component="nav" className="header-menu desktop-only" aria-label="Основное меню">
