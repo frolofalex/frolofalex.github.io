@@ -18,7 +18,7 @@ export default function PromoCard({ title, price, description, phoneDisplay, pho
       className={className}
       style={cardStyle}
     >
-      <Stack className="promo-card-content">
+      <Stack spacing={1} className="promo-card-content">
         <Typography variant="h3" className="promo-title">
           {title}
         </Typography>

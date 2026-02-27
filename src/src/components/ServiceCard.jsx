@@ -1,10 +1,27 @@
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import { Paper, Stack, Typography } from '@mui/material'
+import { Box, Paper, Stack, Typography } from '@mui/material'
 import { Link as RouterLink, useNavigate } from 'react-router-dom'
+
+const iconModules = import.meta.glob('../assets/service-icons/*.png', {
+  eager: true,
+  import: 'default',
+})
+
+const serviceIconMap = Object.entries(iconModules).reduce((acc, [path, module]) => {
+  const fileName = path.split('/').pop()?.replace(/\.png$/i, '')
+  if (fileName) {
+    acc[fileName] = module
+  }
+  return acc
+}, {})
+
+const fallbackIcon = serviceIconMap.default ?? Object.values(serviceIconMap)[0] ?? null
 
 export default function ServiceCard({ service }) {
   const { slug, title, description, children = [], path } = service
   const navigate = useNavigate()
+  const iconKey = service.icon ?? slug ?? path
+  const normalizedKey = iconKey?.split('/').pop()
+  const iconSrc = (normalizedKey && serviceIconMap[normalizedKey]) || fallbackIcon
 
   const goToService = () => {
     navigate(`/services/${path ?? slug}`)
@@ -32,12 +49,22 @@ export default function ServiceCard({ service }) {
       onClick={goToService}
       onKeyDown={handleKeyDown}
     >
-      <Stack spacing={1.5}>
-        <Typography variant="h6" className="card-link">
+      <Stack spacing={1.5} className="feature-card-head" direction="row" alignItems="center">
+        {iconSrc && (
+          <Box
+            component="img"
+            src={iconSrc}
+            alt=""
+            role="presentation"
+            aria-hidden="true"
+            className="service-card-icon"
+            loading="lazy"
+          />
+        )}
+        <Typography className="card-link" component="span" sx={{ fontSize: '1.2rem', fontWeight: 500 }}>
           {title}
         </Typography>
       </Stack>
-      <ArrowForwardIosIcon className="card-arrow" fontSize="inherit" />
       {children.length > 0 && (
         <Stack component="ul" className="child-links">
           {children.map((child) => (

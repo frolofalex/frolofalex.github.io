@@ -7,6 +7,7 @@ import ServiceCard from '../components/ServiceCard.jsx'
 import NotFound from './NotFound.jsx'
 import PromoCard from '../components/PromoCard.jsx'
 import { CONTACT_PHONE_DISPLAY, CONTACT_PHONE_DIAL } from '../constants/contacts.js'
+import Prices from '../components/Prices.jsx'
 
 export default function Service() {
   const { '*': wildcardPath } = useParams()
@@ -56,6 +57,7 @@ export default function Service() {
         </Box>
       )}
       <Paper elevation={0} className="surface-card">
+        <Prices />
         <Stack spacing={2}>
           <Typography variant="h3" component="h1">
             {service.title}

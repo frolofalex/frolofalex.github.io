@@ -7,6 +7,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import MenuIcon from '@mui/icons-material/Menu'
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
+import Pricing from './pages/Pricing.jsx'
 import Service from './pages/Service.jsx'
 import NotFound from './pages/NotFound.jsx'
 import { CONTACT_EMAIL, CONTACT_PHONE_DIAL, CONTACT_PHONE_DISPLAY } from './constants/contacts.js'
@@ -36,6 +37,7 @@ function App() {
     { label: 'Статьи/Видео', path: '/media' },
     { label: 'Контакты', path: '/contacts' },
     { label: 'Вакансии', path: '/careers' },
+    { label: 'Вопросы/Ответы', path: '/faq' },
   ]
 
   const openServicesDrawer = () => setIsServicesDrawerOpen(true)
@@ -137,6 +139,7 @@ function App() {
               <Routes>
                 <Route index element={<Home />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/pricing" element={<Pricing />} />
                 <Route path="/services/*" element={<Service />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
