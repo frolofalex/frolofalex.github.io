@@ -1,6 +1,6 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { Box, Button, Collapse, Paper, Stack, Typography } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { findService } from '../data/services.js'
 import ServiceCard from '../components/ServiceCard.jsx'
@@ -14,6 +14,20 @@ export default function Service() {
   const pathSegments = wildcardPath ? wildcardPath.split('/').filter(Boolean) : []
   const service = findService(pathSegments)
   const [isDetailsOpen, setIsDetailsOpen] = useState(false)
+  const promoOptions = useMemo(() => {
+    if (!service?.promo) {
+      return []
+    }
+    const base = Array.isArray(service.promo) ? service.promo : [service.promo]
+    return base.filter(Boolean)
+  }, [service])
+  const selectedPromo = useMemo(() => {
+    if (!service || promoOptions.length === 0) {
+      return null
+    }
+    const randomIndex = Math.floor(Math.random() * promoOptions.length)
+    return promoOptions[randomIndex]
+  }, [promoOptions, service])
 
   useEffect(() => {
     document.title = service ? `Аргумент — ${service.title}` : 'Аргумент'
@@ -37,12 +51,12 @@ export default function Service() {
 
   return (
     <Stack spacing={4}>
-      {service.promo && (
+      {selectedPromo && (
         <PromoCard
-          title={service.promo.title}
-          price={service.promo.price}
-          description={service.promo.description}
-          backgroundImage={service.promo.backgroundImage}
+          title={selectedPromo.title}
+          price={selectedPromo.price}
+          description={selectedPromo.description}
+          backgroundImage={selectedPromo.backgroundImage}
           phoneDisplay={CONTACT_PHONE_DISPLAY}
           phoneNumber={CONTACT_PHONE_DIAL}
         />

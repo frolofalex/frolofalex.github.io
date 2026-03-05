@@ -2,13 +2,17 @@ import { getHtmlSnippet } from '../content/htmlSnippets.js'
 
 const html = (key) => getHtmlSnippet(`services/${key}`)
 
-export const homePromo = {
-  title: 'Комплексное сопровождение бизнеса',
-  price: 'от 15 000 ₽ / месяц',
-  description: 'Полный пакет юридических услуг, персональный менеджер и оперативное подключение к экспертам.',
-  backgroundImage: null,
-}
+// Home page will pick one random entry from this list.
+export const homePromo = [
+  {
+    title: 'Спецпредложение',
+    price: 'от 15 000 ₽',
+    description: 'Подпись + ее расшифровка. При большом количестве объектов – дополнительные скидки и особые условия. Есть возможность присутствовать при производстве экспертизы.',
+    backgroundImage: null,
+  },
+]
 
+// `promo` may be a single object or an array of promo objects; the Service page will pick a random entry.
 const servicesTree = [
   {
     slug: 'consultation',
@@ -16,9 +20,9 @@ const servicesTree = [
     description: html('consultation/description'),
     details: html('consultation/details'),
     promo: {
-      title: 'Экспресс-консультация эксперта',
-      price: 'от 7 500 ₽',
-      description: 'За 24 часа подготовим заключение по перспективам дела и дадим чек-лист следующего шага.',
+      title: 'Экспресс-оценка',
+      price: '',
+      description: 'Оценим достаточность объектов, пригодность для экспертизы, сформулируем вероятный (предварительный) вывод. слуга выездной консультации: приедем и проконсультируем у Вас в офисе.',
       backgroundImage: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1600&q=80',
     },
     children: [],

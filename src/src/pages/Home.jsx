@@ -1,5 +1,5 @@
 import { Box, Stack } from '@mui/material'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { services } from '../data/services.js'
 import ServiceCard from '../components/ServiceCard.jsx'
 import PromoCard from '../components/PromoCard.jsx'
@@ -11,16 +11,29 @@ export default function Home() {
     document.title = 'Аргумент'
   }, [])
 
+  const [selectedPromo] = useState(() => {
+    if (!homePromo) {
+      return null
+    }
+    const base = Array.isArray(homePromo) ? homePromo : [homePromo]
+    const options = base.filter(Boolean)
+    if (options.length === 0) {
+      return null
+    }
+    const randomIndex = Math.floor(Math.random() * options.length)
+    return options[randomIndex]
+  })
+
   return (
     <Stack spacing={3}>
-      {homePromo && (
+      {selectedPromo && (
         <PromoCard
-          title={homePromo.title}
-          price={homePromo.price}
-          description={homePromo.description}
+          title={selectedPromo.title}
+          price={selectedPromo.price}
+          description={selectedPromo.description}
           phoneDisplay={CONTACT_PHONE_DISPLAY}
           phoneNumber={CONTACT_PHONE_DIAL}
-          backgroundImage={homePromo.backgroundImage}
+          backgroundImage={selectedPromo.backgroundImage}
         />
       )}
       <Box className="feature-grid">
