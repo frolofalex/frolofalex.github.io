@@ -71,7 +71,7 @@ export default function Service() {
         </Box>
       )}
       <Paper elevation={0} className="surface-card">
-        <Prices />
+        <Prices selected={service.prices} />
         <Stack spacing={2}>
           <Typography variant="h3" component="h1">
             {service.title}

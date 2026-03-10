@@ -18,7 +18,7 @@ export default function Pricing() {
             <Paper elevation={0} className="surface-card">
                 <Stack spacing={3}>
                     <Typography variant="h5">Прайс-лист</Typography>
-                    <Prices />
+                    <Prices selected={'all'} />
                 </Stack>
             </Paper>
         </Stack>

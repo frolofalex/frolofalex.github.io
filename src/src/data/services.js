@@ -19,6 +19,7 @@ const servicesTree = [
     title: 'Консультация',
     description: html('consultation/description'),
     details: html('consultation/details'),
+    prices: [1, 2, 3, 4],
     promo: {
       title: 'Экспресс-оценка',
       price: '',
@@ -32,6 +33,7 @@ const servicesTree = [
     title: 'Экспертиза подписи',
     description: html('signature/description'),
     details: html('signature/details'),
+    prices: [1, 2, 3, 4, 5, 6, 11, 12],
     children: [],
   },
   {
@@ -39,6 +41,7 @@ const servicesTree = [
     title: 'Почерковедческая экспертиза',
     description: html('handwriting/description'),
     details: html('handwriting/details'),
+    prices: [1, 2, 3, 4, 9, 10, 11, 12],
     children: [],
   },
   {
@@ -46,6 +49,7 @@ const servicesTree = [
     title: 'Рецензирование заключений',
     description: html('review/description'),
     details: html('review/details'),
+    prices: [1, 2, 3, 7, 8],
     children: [],
   },
   {
@@ -53,6 +57,7 @@ const servicesTree = [
     title: 'Судебная и досудебная экспертизы',
     description: html('court/description'),
     details: html('court/details'),
+    prices: [1, 2, 3, 4, 5, 6, 12, 13, 14],
     children: [],
   },
   {
@@ -60,6 +65,7 @@ const servicesTree = [
     title: 'Техническая экспертиза документов',
     description: html('technical-docs/description'),
     details: html('technical-docs/details'),
+    prices: [1, 2, 3, 4, 13, 14, 20, 15, 16, 17, 18, 19],
     promo: {
       title: 'Комплексная проверка документов',
       price: 'от 22 000 ₽',
@@ -72,6 +78,7 @@ const servicesTree = [
         title: 'Техническая экспертиза печатей',
         description: html('technical-docs/seal-verification/description'),
         details: html('technical-docs/seal-verification/details'),
+        prices: [1, 2, 3, 4, 13, 14, 18],
         children: [],
       },
       {
@@ -79,6 +86,7 @@ const servicesTree = [
         title: 'Техническая экспертиза монтажа',
         description: html('technical-docs/montage-verification/description'),
         details: html('technical-docs/montage-verification/details'),
+        prices: [1, 2, 3, 4, 20, 15, 18],
         children: [],
       },
       {
@@ -86,6 +94,7 @@ const servicesTree = [
         title: 'Техническая экспертиза последовательности',
         description: html('technical-docs/sequence/description'),
         details: html('technical-docs/sequence/details'),
+        prices: [1, 2, 3, 4, 16, 17, 18],
         children: [],
       },
     ],
