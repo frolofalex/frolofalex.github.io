@@ -539,6 +539,86 @@
   box-shadow: 0 15px 35px rgba(39, 52, 139, 0.4);
 }
 
+.promo-carousel {
+  position: relative;
+  width: 100%;
+  border-radius: 0;
+  border: 1px solid rgba(145, 163, 186, 0.25);
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.12);
+  overflow: hidden;
+  background: #0c152f;
+  line-height: 0;
+}
+
+.promo-carousel-viewport {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1200 / 298;
+}
+
+@supports not (aspect-ratio: 1) {
+  .promo-carousel-viewport {
+    height: 298px;
+  }
+}
+
+.promo-carousel-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s ease;
+}
+
+.promo-carousel-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.promo-carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 64px;
+  height: 100%;
+  border: none;
+  color: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  padding: 0;
+}
+
+.promo-carousel-arrow:hover,
+.promo-carousel-arrow:focus-visible {
+  background: rgba(12, 21, 47, 0.3);
+}
+
+.promo-carousel-arrow:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 4px;
+}
+
+.promo-carousel-arrow--prev {
+  left: 0;
+  background: transparent;
+}
+
+.promo-carousel-arrow--next {
+  right: 0;
+  background: transparent;
+}
+
+.promo-carousel-arrow svg {
+  font-size: 2.2rem;
+  pointer-events: none;
+}
+
 .details-toggle {
   align-self: flex-start;
   font-weight: 600;
