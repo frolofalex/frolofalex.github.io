@@ -74,10 +74,10 @@ function App() {
                 </Typography>
                 <Typography variant="body2" className="brand-address">
                   <Box component="span" className="brand-address-line brand-address-line--city">
-                    г. Москва,
+                    г. Новосибирск
                   </Box>{' '}
                   <Box component="span" className="brand-address-line brand-address-line--street">
-                    ул. Примерная, д. 1
+                    {/* Улица и дом */}
                   </Box>
                 </Typography>
               </Stack>
@@ -150,7 +150,7 @@ function App() {
             <ServicesPanel />
           </Box>
           <Box className="app-content">
-            <Container maxWidth="lg">
+            <Container maxWidth={false} sx={{ maxWidth: 1800 }}>
               <Routes>
                 <Route index element={<Home />} />
                 <Route path="/about" element={<About />} />
@@ -163,7 +163,7 @@ function App() {
         </Box>
       </Box>
       <Box component="footer" className="site-footer">
-        <Container maxWidth="lg">
+        <Container maxWidth={false} sx={{ maxWidth: 1800 }}>
           <Stack
             spacing={0.5}
             className="mobile-only footer-contacts"

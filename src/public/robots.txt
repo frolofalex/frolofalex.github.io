@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /pricing
+Allow: /media
+Allow: /contacts
+Allow: /careers
+Allow: /faq
+Allow: /services
+Allow: /services/consultation
+Allow: /services/signature
+Allow: /services/handwriting
+Allow: /services/review
+Allow: /services/court
+Allow: /services/technical-docs
+Allow: /services/technical-docs/seal-verification
+Allow: /services/technical-docs/montage-verification
+Allow: /services/technical-docs/sequence
+
+Host: https://argprime.ru
+Sitemap: https://argprime.ru/sitemap.xml

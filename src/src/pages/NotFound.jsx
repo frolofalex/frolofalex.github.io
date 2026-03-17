@@ -5,9 +5,9 @@ export default function NotFound() {
   return (
     <Paper elevation={0} className="surface-card">
       <Stack spacing={2} alignItems="flex-start">
-        <Typography variant="h3">Страница не найдена</Typography>
+        <Typography variant="h3">Страница находится в разработке</Typography>
         <Typography color="text.secondary">
-          Кажется, вы перешли по несуществующему маршруту. Вернитесь на главную или выберите пункт меню выше.
+          Страница не найдена или находится в разработке
         </Typography>
         <Button component={RouterLink} to="/" variant="contained">
           На главную
