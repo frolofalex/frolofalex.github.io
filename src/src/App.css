@@ -7,8 +7,7 @@
 .app-root {
   min-height: 100vh;
   padding: 64px 0 200px;
-  background: radial-gradient(circle at top, rgba(110, 141, 255, 0.2), transparent 55%),
-    linear-gradient(180deg, #eef2ff 0%, #f4f6fb 45%, #ffffff 100%);
+  background: none;
   padding-top: 120px;
 }
 
