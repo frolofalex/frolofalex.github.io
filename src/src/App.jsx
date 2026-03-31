@@ -82,56 +82,38 @@ function App() {
                 </Typography>
               </Stack>
             </Box>
-            <Box component="nav" className="header-menu desktop-only" aria-label="Основное меню">
-              <Box component="ul" className="header-menu-grid">
-                {headerMenuItems.map((item) => (
-                  <Box
-                    component="li"
-                    key={item.label}
-                    className={`header-menu-item${item.submenu ? ' has-submenu' : ''}`}
-                  >
-                    <Box component={RouterLink} to={item.path} className="header-menu-link">
-                      {item.label}
-                    </Box>
-                    {item.submenu && (
-                      <Box component="ul" className="header-submenu" role="menu">
-                        {[{ label: item.label, path: item.path, isPrimary: true }, ...item.submenu].map((subItem) => (
-                          <Box component="li" key={subItem.label} className="header-submenu-item">
-                            <Box
-                              component={RouterLink}
-                              to={subItem.path}
-                              className={`header-submenu-link${subItem.isPrimary ? ' header-submenu-link--primary' : ''}`}
-                            >
-                              {subItem.label}
-                            </Box>
-                          </Box>
-                        ))}
+            <Box className="header-nav-block desktop-only">
+              <Box component="nav" className="header-menu" aria-label="Основное меню">
+                <Box component="ul" className="header-menu-grid">
+                  {headerMenuItems.map((item) => (
+                    <Box
+                      component="li"
+                      key={item.label}
+                      className={`header-menu-item${item.submenu ? ' has-submenu' : ''}`}
+                    >
+                      <Box component={RouterLink} to={item.path} className="header-menu-link">
+                        {item.label}
                       </Box>
-                    )}
-                  </Box>
-                ))}
+                      {item.submenu && (
+                        <Box component="ul" className="header-submenu" role="menu">
+                          {[{ label: item.label, path: item.path, isPrimary: true }, ...item.submenu].map((subItem) => (
+                            <Box component="li" key={subItem.label} className="header-submenu-item">
+                              <Box
+                                component={RouterLink}
+                                to={subItem.path}
+                                className={`header-submenu-link${subItem.isPrimary ? ' header-submenu-link--primary' : ''}`}
+                              >
+                                {subItem.label}
+                              </Box>
+                            </Box>
+                          ))}
+                        </Box>
+                      )}
+                    </Box>
+                  ))}
+                </Box>
               </Box>
             </Box>
-            <Stack spacing={1} className="header-contacts desktop-only">
-              <MuiLink
-                href={`mailto:${CONTACT_EMAIL}`}
-                className="contact-link"
-                underline="none"
-                sx={contactLinkSx}
-              >
-                <MailOutlineIcon fontSize="small" className="contact-icon" />
-                <span>{CONTACT_EMAIL}</span>
-              </MuiLink>
-              <MuiLink
-                href={`tel:${CONTACT_PHONE_DIAL}`}
-                className="contact-link"
-                underline="none"
-                sx={contactLinkSx}
-              >
-                <PhoneInTalkIcon fontSize="small" className="contact-icon" />
-                <span>{CONTACT_PHONE_DISPLAY}</span>
-              </MuiLink>
-            </Stack>
             <Button
               type="button"
               variant="contained"
@@ -165,10 +147,10 @@ function App() {
       <Box component="footer" className="site-footer">
         <Container maxWidth={false} sx={{ maxWidth: 1800 }}>
           <Stack
-            spacing={0.5}
-            className="mobile-only footer-contacts"
+            spacing={4}
+            className="footer-contacts"
             direction="row"
-            justifyContent="space-between"
+            justifyContent="center"
             alignItems="center"
           >
             <MuiLink

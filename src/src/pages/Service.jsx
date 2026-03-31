@@ -1,13 +1,11 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { Box, Button, Collapse, Paper, Stack, Typography } from '@mui/material'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { findService } from '../data/services.js'
 import ServiceCard from '../components/ServiceCard.jsx'
 import NotFound from './NotFound.jsx'
-import PromoCard from '../components/PromoCard.jsx'
 import PromoCarousel from '../components/PromoCarousel.jsx'
-import { CONTACT_PHONE_DISPLAY, CONTACT_PHONE_DIAL } from '../constants/contacts.js'
 import Prices from '../components/Prices.jsx'
 
 export default function Service() {
@@ -15,20 +13,6 @@ export default function Service() {
   const pathSegments = wildcardPath ? wildcardPath.split('/').filter(Boolean) : []
   const service = findService(pathSegments)
   const [isDetailsOpen, setIsDetailsOpen] = useState(false)
-  const promoOptions = useMemo(() => {
-    if (!service?.promo) {
-      return []
-    }
-    const base = Array.isArray(service.promo) ? service.promo : [service.promo]
-    return base.filter(Boolean)
-  }, [service])
-  const selectedPromo = useMemo(() => {
-    if (!service || promoOptions.length === 0) {
-      return null
-    }
-    const randomIndex = Math.floor(Math.random() * promoOptions.length)
-    return promoOptions[randomIndex]
-  }, [promoOptions, service])
 
   useEffect(() => {
     document.title = service ? `Аргумент — ${service.title}` : 'Аргумент'

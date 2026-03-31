@@ -162,8 +162,8 @@ export default function Prices({ selected }) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {filteredServices.map(({ path, name, price, term, second }) => (
-                        <TableRow key={`${path}-${name}`} hover>
+                    {filteredServices.map(({ path, name, price, term, second }, index) => (
+                        <TableRow key={`${path}-${name}`} hover sx={{ backgroundColor: index % 2 === 0 ? 'action.hover' : 'inherit' }}>
                             <TableCell component="th" scope="row">
                                 {name}
                             </TableCell>
