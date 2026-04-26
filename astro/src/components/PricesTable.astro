@@ -1,0 +1,40 @@
+---
+import { priceList } from '../data/prices.js'
+
+interface Props {
+  selected?: number[] | 'all' | null
+}
+
+const { selected } = Astro.props
+
+const rows = selected == null
+  ? []
+  : selected === 'all'
+    ? priceList
+    : priceList.filter((s) => (selected as number[]).includes(s.id))
+---
+
+{rows.length > 0 && (
+  <div class="prices-table-wrapper">
+    <table class="prices-table" aria-label="Таблица стоимости услуг">
+      <thead>
+        <tr>
+          <th>Услуга</th>
+          <th>Цена ₽</th>
+          <th>Срок (рабочих дней)</th>
+          <th>+ объект</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row, i) => (
+          <tr class={i % 2 === 0 ? 'row-even' : ''}>
+            <td>{row.name}</td>
+            <td>{row.price || '—'}</td>
+            <td>{row.term || '—'}</td>
+            <td>{row.second || '—'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}

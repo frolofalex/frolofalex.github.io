@@ -1,2 +1,18 @@
 # MacOS
 .DS_Store
+
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Astro cache
+.astro/
+**/.astro/
+
+# Vite cache
+**/.vite/
+
+# Build tool logs
+npm-debug.log*
+yarn-error.log
+

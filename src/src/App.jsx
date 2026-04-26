@@ -74,7 +74,7 @@ function App() {
                 </Typography>
                 <Typography variant="body2" className="brand-address">
                   <Box component="span" className="brand-address-line brand-address-line--city">
-                    г. Новосибирск
+                    г. Новосибирск, ул. Объединение 9, офис 110
                   </Box>{' '}
                   <Box component="span" className="brand-address-line brand-address-line--street">
                     {/* Улица и дом */}

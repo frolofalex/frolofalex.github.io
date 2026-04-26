@@ -1,0 +1,47 @@
+---
+import { services } from '../data/services.js'
+
+interface Props {
+  currentPath: string
+}
+
+const { currentPath } = Astro.props
+
+function normalizeServicePath(pathname: string) {
+  if (!pathname?.startsWith('/services')) return null
+  return pathname.replace(/^\/services\/?/, '').replace(/\/$/, '')
+}
+
+const activePath = normalizeServicePath(currentPath)
+---
+
+<nav class="services-panel-content" aria-label="Список услуг">
+  <span class="services-panel-title">Все услуги</span>
+  <ul class="services-list">
+    {services.map((service) => {
+      const isActive = activePath === service.path
+      const isAncestor = activePath?.startsWith(`${service.path}/`) ?? false
+      const cls = ['services-list-item', isActive && 'services-list-item--active', isAncestor && 'services-list-item--ancestor'].filter(Boolean).join(' ')
+      return (
+        <>
+          <li class={cls} style={`padding-left: 16px`}>
+            <a href={`/services/${service.path}`} class="services-list-link">
+              <span class="services-list-text">{service.title}</span>
+            </a>
+          </li>
+          {(service.children ?? []).map((child) => {
+            const childActive = activePath === child.path
+            const childCls = ['services-list-item', childActive && 'services-list-item--active'].filter(Boolean).join(' ')
+            return (
+              <li class={childCls} style={`padding-left: 28px`}>
+                <a href={`/services/${child.path}`} class="services-list-link">
+                  <span class="services-list-text">{child.title}</span>
+                </a>
+              </li>
+            )
+          })}
+        </>
+      )
+    })}
+  </ul>
+</nav>

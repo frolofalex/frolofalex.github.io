@@ -1,0 +1,93 @@
+---
+import MobileMenus from './MobileMenus.jsx'
+import { services } from '../data/services.js'
+import { CONTACT_EMAIL, CONTACT_PHONE_DIAL, CONTACT_PHONE_DISPLAY } from '../constants/contacts.js'
+
+const headerMenuItems = [
+  {
+    label: 'О компании',
+    path: '/about',
+    submenu: [
+      { label: 'Эксперты', path: '/about/experts' },
+      { label: 'Документы', path: '/about/documents' },
+      { label: 'Оснащение', path: '/about/equipment' },
+    ],
+  },
+  { label: 'Цены', path: '/pricing' },
+  { label: 'Статьи/Видео', path: '/media' },
+  { label: 'Контакты', path: '/contacts' },
+  { label: 'Вакансии', path: '/careers' },
+  { label: 'Вопросы/Ответы', path: '/faq' },
+]
+
+// Strip HTML content from services for mobile nav — only need title/path for navigation
+const navServices = services.map((s) => ({
+  path: s.path,
+  title: s.title,
+  children: (s.children ?? []).map((c) => ({ path: c.path, title: c.title })),
+}))
+---
+
+<header class="site-header">
+  <div class="site-header-container">
+    <div class="header-row">
+      <!-- Mobile controls (React island) — renders hamburger button, services button, and drawers -->
+      <MobileMenus client:load navServices={navServices} headerMenuItems={headerMenuItems} />
+
+      <!-- Brand — static HTML for SEO -->
+      <a href="/" class="brand-link" aria-label="Перейти на главную">
+        <img src="/logo.png" alt="Логотип Аргумент" class="logo-placeholder" />
+        <div class="brand-block">
+          <div class="branding">
+            <img src="/favicon.svg" alt="" class="brand-mini-logo" aria-hidden="true" />
+            Аргумент
+          </div>
+          <div class="brand-address">
+            <span class="brand-address-line brand-address-line--city">г. Новосибирск, ул. Объединение 9, офис 110</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Desktop navigation — fully static for SEO -->
+      <div class="header-nav-block">
+        <nav class="header-menu desktop-only" aria-label="Основное меню">
+          <ul class="header-menu-grid">
+            {headerMenuItems.map((item) => (
+              <li class={`header-menu-item${item.submenu ? ' has-submenu' : ''}`}>
+                <a href={item.path} class="header-menu-link">{item.label}</a>
+                {item.submenu && (
+                  <ul class="header-submenu" role="menu">
+                    {[{ label: item.label, path: item.path, isPrimary: true }, ...item.submenu].map((sub) => (
+                      <li class="header-submenu-item">
+                        <a
+                          href={sub.path}
+                          class={`header-submenu-link${sub.isPrimary ? ' header-submenu-link--primary' : ''}`}
+                        >
+                          {sub.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div class="header-contacts">
+          <a href={`mailto:${CONTACT_EMAIL}`} class="header-contact-link">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+            <span>{CONTACT_EMAIL}</span>
+          </a>
+          <a href={`tel:${CONTACT_PHONE_DIAL}`} class="header-contact-link">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true">
+              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
+            <span>{CONTACT_PHONE_DISPLAY}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

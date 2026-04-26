@@ -1,0 +1,34 @@
+---
+interface Props {
+  service: {
+    slug: string
+    title: string
+    path: string
+    children?: Array<{ slug: string; title: string; path: string }>
+  }
+}
+
+const { service } = Astro.props
+const { slug, title, path, children = [] } = service
+const iconSrc = `/assets/service-icons/${slug}.png`
+---
+
+<article class="feature-card">
+  <a href={`/services/${path}`} class="feature-card-main-link" aria-label={`Перейти в раздел ${title}`}>
+    <div class="feature-card-head">
+      <img src={iconSrc} alt="" aria-hidden="true" class="service-card-icon" loading="lazy" />
+      <span class="card-link">{title}</span>
+    </div>
+  </a>
+  {children.length > 0 && (
+    <ul class="child-links">
+      {children.map((child) => (
+        <li>
+          <a href={`/services/${child.path ?? child.slug}`} class="child-link">
+            — {child.title}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )}
+</article>

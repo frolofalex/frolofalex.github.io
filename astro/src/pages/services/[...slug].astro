@@ -1,0 +1,77 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import PricesTable from '../../components/PricesTable.astro'
+import ServiceCard from '../../components/ServiceCard.astro'
+import PromoCarousel from '../../components/PromoCarousel.jsx'
+import { services, findService } from '../../data/services.js'
+
+export function getStaticPaths() {
+  const paths: { params: { slug: string } }[] = []
+  const collect = (nodes: typeof services) => {
+    for (const node of nodes) {
+      paths.push({ params: { slug: node.path } })
+      if (node.children?.length) collect(node.children)
+    }
+  }
+  collect(services)
+  return paths
+}
+
+const { slug } = Astro.params
+const service = findService(slug)
+
+if (!service) return Astro.redirect('/404')
+
+const childServices = service.children ?? []
+
+// Parse detail paragraphs (same logic as the Vite version)
+const detailParagraphs: string[] = Array.isArray(service.details)
+  ? service.details
+  : typeof service.details === 'string'
+    ? /<\s*[\w!?]/.test(service.details)
+      ? [service.details]
+      : service.details.split(/\n\s*\n+/).map((p: string) => p.trim()).filter(Boolean)
+    : []
+
+// Strip HTML tags for meta description
+const metaDescription = service.description
+  ? service.description.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim().slice(0, 160)
+  : `${service.title} — экспертная организация Аргумент, Новосибирск.`
+---
+
+<Layout title={`Аргумент — ${service.title}`} description={metaDescription}>
+  <div class="page-stack">
+    <PromoCarousel client:load />
+
+    {childServices.length > 0 && (
+      <div class="feature-grid">
+        {childServices.map((child) => (
+          <ServiceCard service={child} />
+        ))}
+      </div>
+    )}
+
+    <div class="surface-card">
+      <h1 class="service-page-title">{service.title}</h1>
+
+      <PricesTable selected={service.prices} />
+
+      <div class="service-content">
+        {service.description && (
+          <div class="service-description" set:html={service.description} />
+        )}
+
+        {detailParagraphs.length > 0 && (
+          <details class="service-details">
+            <summary class="service-details-toggle">Подробнее</summary>
+            <div class="service-details-body">
+              {detailParagraphs.map((paragraph) => (
+                <div set:html={paragraph} />
+              ))}
+            </div>
+          </details>
+        )}
+      </div>
+    </div>
+  </div>
+</Layout>
